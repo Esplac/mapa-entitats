@@ -1,0 +1,92 @@
+ #filter { 
+	position: fixed; 
+	z-index: 999; 
+	left: 5%; 
+	background-color:white;   
+	border-radius: 5px;
+	border: 2px solid #F69D0B;
+	padding: 20px; 
+	visibility: hidden;
+}
+#logo { 
+	position: fixed; 
+	z-index: 999; 
+	left: 90%; 
+	top: 90%;
+	height: 60px;
+	/* background-color:white;   
+	border-radius: 5px;
+	border: 2px solid #F69D0B;
+	padding: 20px; 
+	visibility: hidden; */
+}
+
+
+
+#map {
+	position: fixed; 
+	top: 0; 
+	bottom: 0; 
+	left: 0; 
+	right:0;
+}
+
+#cerca {
+	padding:8px;
+	/* //display:block; */
+	border:none;
+	border-bottom:1px solid #ccc;
+	/* width:100% */
+}
+
+.tag {
+	margin-right: 2px;
+	margin-bottom: 2px;
+	text-align: center;
+	border-radius: 3px;
+	padding: 5px;
+	color: white;
+	font-weight: bold;
+	font-size: 80%;
+	display: inline-block;
+}
+
+.dive {
+	
+	background-color:#d28b78;
+}
+
+.etiq {
+
+	background-color:#82afd4;     
+}
+
+.ofer {
+
+	background-color:#96BE97;   
+}
+
+.fit {
+		max-width: 100%;
+    max-height: 100%;
+}
+
+div .filtres {
+	visibility: hidden;
+	display: none;
+}
+
+.filterButton {
+	border-radius: 5px;
+	text-align: center;
+	padding: 5px;
+	background-color:rgb(255, 207, 130);
+	
+
+
+}
+
+.filterButton:hover {
+	background-color: #F69D0B;
+		
+}

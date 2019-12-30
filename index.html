@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Mapa d'entitats - Esplac</title>
+    <head>
+		  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
+		    integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
+	
+	
+				crossorigin=""/>
+
+
+			<link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.3.0/dist/MarkerCluster.css" />
+			  <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.3.0/dist/MarkerCluster.Default.css" />
+
+
+
+
+		  <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
+   			integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
+   			crossorigin=""></script>
+
+
+				<script src="https://unpkg.com/leaflet.markercluster@1.3.0/dist/leaflet.markercluster.js"></script>
+		<link rel="stylesheet" type="text/css" href="mapa.css">	</style>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+		<meta charset="utf-8" />
+  </head>
+  <body>
+		<div id="filter"> </div>
+		<div id="map"> </div>
+		<div id="logo"> </div>
+		<script src='mapa.js'> </script>
+    <script type="text/javascript">
+      // Client ID and API key from the Developer Console
+      var CLIENT_ID = '372461612696-r2usqo1dvohle73mgvgc13nnsu6nel36.apps.googleusercontent.com';
+      var API_KEY = 'AIzaSyAjbUuLPM7skMP9tzr537mJ5TvWwuR2CPw';
+
+      // Array of API discovery doc URLs for APIs used by the quickstart
+      var DISCOVERY_DOCS = ["https://sheets.googleapis.com/$discovery/rest?version=v4"];
+
+      // Authorization scopes required by the API; multiple scopes can be
+      // included, separated by spaces.
+      var SCOPES = "https://www.googleapis.com/auth/spreadsheets.readonly";
+      /**
+       *  On load, called to load the auth2 library and API client library.
+       */
+      function handleClientLoad() {
+        gapi.load('client:auth2', initClient);
+      }
+
+      /**
+       *  Initializes the API client library and sets up sign-in state
+       *  listeners.
+       */
+      function initClient() {
+        gapi.client.init({
+          apiKey: API_KEY,
+          clientId: CLIENT_ID,
+          discoveryDocs: DISCOVERY_DOCS,
+          scope: SCOPES
+        }).then(function () {
+          // Listen for sign-in state changes.
+          gapi.auth2.getAuthInstance().isSignedIn.listen(updateSigninStatus);
+
+          // Handle the initial sign-in state.
+          updateSigninStatus(gapi.auth2.getAuthInstance().isSignedIn.get());
+        }, function(error) {
+          console.info(JSON.stringify(error, null, 2));
+        });
+      }
+
+      /**
+       *  Called when the signed in status changes, to update the UI
+       *  appropriately. After a sign-in, the API is called.
+       */
+      function updateSigninStatus(isSignedIn) {
+        if (isSignedIn) {
+          listMajors();
+        } else {
+        }
+      }
+
+
+      /**
+       * Print the names and majors of students in a sample spreadsheet:
+       * https://docs.google.com/spreadsheets/d/1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgvE2upms/edit
+       */
+      function listMajors() {
+        gapi.client.sheets.spreadsheets.values.get({
+          spreadsheetId: '19YDP_okXOrdFtxMpbggxzMBAalgkyOl0d5N-Q80bsPQ',
+          range: 'Dades',
+        }).then(function(response) {
+          var range = response.result;
+					let dades = parseDades(range.values);
+					afegirPunts(dades);
+        }, function(response) {
+          console.info('Error: ' + response.result.error.message);
+        });
+      }
+			
+			// Retorna instancia de Entitat buida
+			function getEntitat() {
+				let entitat = {
+					nom: "",
+					ambits: [],
+					territori: "",
+					sector: "",
+					descripcio: "",
+					etiquetes: [],
+					oferir: [],
+					contacte: {
+						web: "",
+						telefon: "",
+						xxss: "",
+						correu: "",
+						adreça: "",
+					},
+					nomContacte: "",
+					resposta: "",
+					coordenades: [],
+					marker: {},
+					count: 0,
+					imatge: "",
+				}
+				return entitat;
+
+			}
+
+			// Parsegem les dades obtenides del drive en entitats i llistats de criteris de filtratges
+			function parseDades(dades) {
+				let entitats = [];
+				let diversitats = [];
+				let tags = [];
+				let oferta = [];
+				let sectors = [];
+				for(i = 2; i < dades.length;++i){
+					if(dades[i].length > 21 && dades[i][22] != undefined) {
+						let d = dades[i];
+						let e = getEntitat();
+						e.nom=d[0];
+						e.ambits.push(d[1]);
+						if(d[2] != "") e.ambits.push(d[2]);
+						e.territori=d[3];
+						e.sector=d[4];
+						e.descripcio=d[5];
+							
+						if(d[6] != "") e.etiquetes.push(d[6]);
+						if(d[7] != "") e.etiquetes.push(d[7]);
+						if(d[8] != "") e.etiquetes.push(d[8]);
+
+									
+						if(d[9] != "") e.oferir.push(d[9]);
+						if(d[10] != "") e.oferir.push(d[10]);
+						if(d[11] != "") e.oferir.push(d[11]);
+
+						e.contacte.web=d[12];
+						e.contacte.telefon=d[13];
+						e.contacte.xss=d[14];
+						e.contacte.correu=d[15];
+						e.contacte.adreça=d[16];
+						e.nomContacte=d[17];
+						e.resposta=d[18];
+						//console.info(d);
+						e.coordenades=d[22].split(",");
+						e.coordenades[0] = parseFloat(e.coordenades[0]);
+						e.coordenades[1] = parseFloat(e.coordenades[1]);
+						if(d[23] != undefined) {
+							e.imatge=d[23];
+						}
+						entitats.push(e);
+						for(j = 0; j < e.ambits.length; ++j) {
+							if(diversitats.indexOf(e.ambits[j]) == -1){
+								diversitats.push(e.ambits[j]);
+							}
+						}
+						for(j = 0; j < e.etiquetes.length; ++j) {
+							if(tags.indexOf(e.etiquetes[j]) == -1){
+								tags.push(e.etiquetes[j]);
+							}
+						}
+
+						for(j = 0; j < e.oferir.length; ++j) {
+							if(oferta.indexOf(e.oferir[j]) == -1){
+								oferta.push(e.oferir[j]);
+							}
+						}
+						if(e.sector != "" && sectors.indexOf(e.sector)== -1) {
+							sectors.push(e.sector);
+						}
+
+					}
+				}
+			setFiltres(diversitats, tags, oferta, sectors);
+			return  entitats;
+					
+			}
+
+    </script>
+
+    <script async defer src="https://apis.google.com/js/api.js"
+      onload="this.onload=function(){};handleClientLoad()"
+      onreadystatechange="if (this.readyState === 'complete') this.onload()">
+    </script>
+
+  </body>
+</html>
