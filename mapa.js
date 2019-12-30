@@ -287,7 +287,7 @@ function mostraFiltres() {
  */
 function creaDiv() {
 	var logos = document.getElementById('logo');
-	logos.innerHTML = "<img class=\"fit\" src=\"logo_esplac_rgb.png\">";
+	logos.innerHTML = "<img class=\"fit\" src=\"img/logo_esplac_rgb.png\">";
 	var f = document.getElementById('filter');
 	var cont = "";
 	var l = "<br/>";
