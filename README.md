@@ -1,0 +1,1 @@
+# Mapa d'entitats - Inclusió i diversitat
