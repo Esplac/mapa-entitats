@@ -291,8 +291,8 @@ function creaDiv() {
 	var f = document.getElementById('filter');
 	var cont = "";
 	var l = "<br/>";
-	cont+= "<i class=\"fa fa-search\"> </i> <input type=\"text\" id=\"cerca\" placeholder=\"Cerca per el nom de l'entitat\" oninput=\"getNom()\"" +l+l;
-	cont+= l+"<span  class=\"filterButton\" onclick=\"mostraFiltres()\"><i class=\"fa fa-filter\"></i> filtra </span>"+l;
+	cont+= "<i class=\"fa fa-search\"> </i> <input type=\"text\" id=\"cerca\" placeholder=\"Cerca pel nom de l'entitat\" oninput=\"getNom()\"" +l+l;
+	cont+= l+"<span style=\"cursor:pointer\" class=\"filterButton\" onclick=\"mostraFiltres()\"><i class=\"fa fa-filter\"></i> filtra </span>"+l;
 	cont+="<div class=\"filtres\" >"+l+"<b> Diverstitats </b>"+l;
 	for(i = 0; i < filtres.diversitats.length; ++i) {
 		var nom = filtres.diversitats[i];
