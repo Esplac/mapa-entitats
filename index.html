@@ -96,9 +96,9 @@
                             e.contacte.adreça=d[16];
      
                             //console.info(d);
-                            e.coordenades=d[17].split(",");
-                            e.coordenades[0] = parseFloat(e.coordenades[0]);
-                            e.coordenades[1] = parseFloat(e.coordenades[1]);
+							if(d[17] == "") continue;
+                            e.coordenades = tractaCoordenades(d[17]);
+
                             if(d[18] != undefined) {
                                 e.imatge=d[18];
                             }

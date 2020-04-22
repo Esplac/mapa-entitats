@@ -76,9 +76,33 @@ function pintaPunt(d){
 	
 	
 	//pintem el punt	
+	
  	return L.marker(d.coordenades/*,{icon: greenIcon}*/).bindPopup(con);//.addTo(map);// borrar .addTo(map) per clusters
 }
 
+function tractaCoordenades(coordString) {
+	// COmprovem primer el format de les coordenades i l'actualitzem amb les llibreries Geodesy
+	if(/\d+°\d+'\d+\.\d+"(N|S) ?\d+°\d+'\d+\.\d+"(E|W) ?/.test(coordString)) {
+		// fem la conversió
+		var parts = coordString.split(/[^\d\w\.]+/);
+		var lat = ConvertDMSToDD(parts[0], parts[1], parts[2], parts[3]);
+    	var lng = ConvertDMSToDD(parts[4], parts[5], parts[6], parts[7]);
+
+		return [lat, lng];
+	} else {
+		return [parseFloat(coordString.split(",")[0]), 
+				parseFloat(coordString.split(",")[1])];
+	}
+}
+
+function ConvertDMSToDD(degrees, minutes, seconds, direction) {
+    var dd = Number(degrees) + Number(minutes)/60 + Number(seconds)/(60*60);
+
+    if (direction == "S" || direction == "W") {
+        dd = dd * -1;
+    } // Don't do anything for N or E
+    return dd;
+}
 
 /*
  * Quan afegim un nou criteri de filtratge:
@@ -336,6 +360,7 @@ function afegirPunts(dades) {
 
 	for(var i =0; i<dades.length; ++i) {			
 		let d = dades[i];
+		if(d.coordenades == "") continue;
 		m = pintaPunt(d);
 		d.marker = m;
 		cluster.addLayer(m);
