@@ -311,7 +311,7 @@ function mostraFiltres() {
  */
 function creaDiv() {
 	var logos = document.getElementById('logo');
-	logos.innerHTML = "<img class=\"fit\" src=\"img/logo_esplac_rgb.png\">";
+	//logos.innerHTML = "<img class=\"fit\" src=\"img/logo_esplac_rgb.png\"> <img class=\"fit\" src=\"img/logo_casals.png\">";
 	var f = document.getElementById('filter');
 	var cont = "";
 	var l = "<br/>";

@@ -11,16 +11,16 @@
 #logo { 
 	position: fixed; 
 	z-index: 999; 
-	left: 90%; 
-	top: 90%;
-	height: 60px;
-	/* background-color:white;   
-	border-radius: 5px;
-	border: 2px solid #F69D0B;
-	padding: 20px; 
-	visibility: hidden; */
+	right: 10px; 
+	bottom: 10px;
+	width: 200px;
 }
 
+.column {
+		float: left;
+		margin: auto;
+		width: 50%;
+}
 
 
 #map {
