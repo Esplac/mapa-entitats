@@ -256,7 +256,7 @@ function updateFiltreNom() {
 		while(i < n) {
 			let e = l[i];
 		
-			if(e.nom.toLowerCase().indexOf(NOM.toLowerCase()) == -1) {
+			if(e.nom.toLowerCase().indexOf(NOM.toLowerCase()) == -1 && e.nom.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").indexOf(NOM.toLowerCase()) == -1) {
 				
 				cluster.removeLayer(e.marker);
 				if(!nomFiltrat.includes(e) ) {
