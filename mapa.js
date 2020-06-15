@@ -316,7 +316,7 @@ function creaDiv() {
 	var cont = "";
 	var l = "<br/>";
 	cont+= "<i class=\"fa fa-search\"> </i> <input type=\"text\" id=\"cerca\" placeholder=\"Cerca pel nom de l'entitat\" oninput=\"getNom()\"" +l+l;
-	cont+= l+"<span style=\"cursor:pointer\" class=\"filterButton\" onclick=\"mostraFiltres()\"><i class=\"fa fa-filter\"></i> filtra </span>"+l;
+	cont+= l+"<span style=\"cursor:pointer\" class=\"filterButton\" onclick=\"mostraFiltres()\"><i class=\"fa fa-filter\"></i> Filtra </span>"+l;
 	cont+="<div class=\"filtres\" >"+l+"<b> Diverstitats </b>"+l;
 	for(i = 0; i < filtres.diversitats.length; ++i) {
 		var nom = filtres.diversitats[i];
@@ -340,6 +340,8 @@ function creaDiv() {
 //
 //	}
 	cont += "</div>"
+	// Enllaç formulari
+	cont += "<p>Si vols aparèixer a aquest mapa, omple <a href=\"https://infoesplac.typeform.com/to/fPFOZ0\" target=\"_blank\">aquest formulari</a>!</p>"
 	f.innerHTML = cont;
 	f.style = "visibility: visible;";
 }

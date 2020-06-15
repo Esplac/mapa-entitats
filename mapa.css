@@ -7,19 +7,22 @@
 	border: 2px solid #F69D0B;
 	padding: 20px; 
 	visibility: hidden;
+	font-family: "Helvetica Neue";
+	max-width: 200px;
 }
 #logo { 
 	position: fixed; 
 	z-index: 999; 
 	right: 10px; 
 	bottom: 10px;
-	width: 200px;
+	height: 60px;
 }
 
 .column {
 		float: left;
 		margin: auto;
-		width: 50%;
+		height: 100%;
+		width: auto;
 }
 
 
