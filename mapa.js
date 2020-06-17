@@ -341,7 +341,7 @@ function creaDiv() {
 //	}
 	cont += "</div>"
 	// Enllaç formulari
-	cont += "<p>Si vols aparèixer a aquest mapa, omple <a href=\"https://infoesplac.typeform.com/to/fPFOZ0\" target=\"_blank\">aquest formulari</a>!</p>"
+	cont += "<p>Si vols aparèixer al mapa, omple <a href=\"https://infoesplac.typeform.com/to/fPFOZ0\" target=\"_blank\">aquest formulari</a>!</p>"
 	f.innerHTML = cont;
 	f.style = "visibility: visible;";
 }
