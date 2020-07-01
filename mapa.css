@@ -12,7 +12,8 @@
 	padding: 20px; 
 	visibility: hidden;
 	font-family: "Montserrat";
-	max-width: 200px;
+	font-size: 10pt;
+	max-width: 240px;
 }
 #logo { 
 	position: fixed; 
