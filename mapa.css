@@ -1,3 +1,7 @@
+.leaflet-popup-content {
+	font-family: "Montserrat";
+}
+
  #filter { 
 	position: fixed; 
 	z-index: 999; 
@@ -7,7 +11,7 @@
 	border: 2px solid #F69D0B;
 	padding: 20px; 
 	visibility: hidden;
-	font-family: "Helvetica Neue";
+	font-family: "Montserrat";
 	max-width: 200px;
 }
 #logo { 

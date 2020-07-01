@@ -322,11 +322,13 @@ function creaDiv() {
 		var nom = filtres.diversitats[i];
 		cont+="<input type=\"checkbox\" name=\"ambits\" value=\""+nom+"\"onchange=\"toggleCheckbox(this)\" >"+nom+l;
 	}
+		/*
 	cont+="<b> Etiquetes </b>"+l;
 	for(i = 0; i < filtres.tags.length; ++i) {
 		var nom = filtres.tags[i];
 		cont+="<input type=\"checkbox\" name=\"etiquetes\" value=\""+nom+"\" onchange=\"toggleCheckbox(this)\" >"+nom+l;
 	}
+	*/
 	cont+="<b> Qué pot oferir? </b>"+l;
 	for(i = 0; i < filtres.oferta.length; ++i) {
 		var nom = filtres.oferta[i];
